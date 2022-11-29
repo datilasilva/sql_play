@@ -11,3 +11,7 @@ We'll then show you the basics of creating tables and selecting data in various 
 You'll learn important concepts associated with relational databases. You will run SQL commands to create database tables and define data element types..
 
  By the end of this course you should have a good understanding of the SQL programming language. '
+ 
+ 
+ 
+ https://www.udemy.com/course/sql-intro/learn/lecture/10729464#overview
