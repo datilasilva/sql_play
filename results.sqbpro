@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="D:/Downloads/Ex_Files_Learning_SQL_Programming/Ex_Files_Learning_SQL_Programming/Exercise Files/results.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1251"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,6:mainstates"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="people" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="78"/><column index="2" value="78"/><column index="3" value="106"/><column index="4" value="43"/><column index="5" value="90"/><column index="6" value="82"/><column index="7" value="41"/><column index="8" value="73"/><column index="9" value="76"/><column index="10" value="223"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="states" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="1" mode="0"/></sort><column_widths><column index="1" value="97"/><column index="2" value="97"/><column index="3" value="62"/><column index="4" value="118"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">/*SELECT */
+SELECT * FROM people;
+
+/*COLUMNS */
+SELECT last_name, first_name FROM people;
+SELECT first_name, company FROM people;
+
+/*WHERE */
+SELECT * FROM people 
+WHERE state='CA';
+
+/*LOGICAL OPERATION */
+SELECT first_name, last_name, team
+FROM people 
+WHERE state='CA' AND shirt_or_hat='shirt';
+
+/*LOGICAL OPERATION AND, IS NOT*/
+SELECT first_name, last_name, team
+FROM people 
+WHERE state='CA' AND shirt_or_hat='shirt' AND team IS NOT 'blue';
+
+/*LOGICAL OPERATION != is same IS NOT operation*/
+SELECT first_name, last_name, team
+FROM people 
+WHERE state='CA' AND shirt_or_hat='shirt' AND team != 'blue';
+
+/*LOGICAL OPERATION OR */
+SELECT first_name, last_name
+FROM people 
+WHERE (state='CA' OR state='CO') AND shirt_or_hat='shirt';
+
+/*LOGICAL OPERATION % */
+SELECT first_name, last_name, state
+FROM people 
+WHERE first_name LIKE '%C';
+
+/*LOGICAL OPERATION % */
+SELECT first_name, last_name, state
+FROM people 
+WHERE first_name LIKE '%on%';
+
+/*LOGICAL OPERATION LIMIT */
+SELECT first_name, last_name, state, company
+FROM people 
+WHERE company LIKE '%LCC'
+LIMIT 10 OFFSET 5;
+
+/*ORDER BY */
+SELECT first_name, last_name
+FROM people 
+ORDER BY first_name DESC;
+
+/*ORDER BY */
+SELECT first_name, last_name
+FROM people 
+ORDER BY first_name ASC;
+
+/*ORDER BY */
+SELECT first_name, last_name
+FROM people 
+ORDER BY state ASC, first_name DESC;
+
+/*LENGTH */
+SELECT first_name, LENGTH(first_name)
+FROM people;
+
+/*DISTINCT */
+SELECT DISTINCT(first_name) FROM people
+ORDER BY first_name;
+
+/*COUNT */
+SELECT COUNT(*) FROM people
+WHERE state='CA';
+
+/*JOIN */
+SELECT people.first_name, people.state, states.division
+FROM people
+JOIN states
+ON people.state=states.state_abbrev;
+
+/* INNER JOIN - NOT NECESSARY CORRELATION, BUT ONLY MATCH
+LEFT (OUTER) JOIN  ALL TABLE
+FULL OUTER JOIN*/
+SELECT people.first_name, people.last_name, people.state, states.state_name
+FROM states
+JOIN people ON people.state=states.state_abbrev;
+
+SELECT 4+2;
+
+SELECT 3&gt;1;
+
+SELECT first_name, quiz_points
+FROM people
+WHERE quiz_points &gt; 70;
+
+SELECT SUM(quiz_points)
+FROM PEOPLE;
+
+SELECT team, count(*), sum(quiz_points)
+FROM people
+GROUP BY team;
+
+SELECT team, count(*), sum(quiz_points)
+FROM people
+GROUP BY team;
+
+/* SUBQUERY*/
+SELECT first_name, last_name, quiz_points
+FROM people
+WHERE quiz_points=(SELECT MAX(quiz_points) FROM people);
+
+SELECT LOWER(first_name), UPPER(last_name)
+FROM people;
+
+SELECT LOWER(first_name), SUBSTR(last_name, 1, 5)
+FROM people;
+
+SELECT LOWER(first_name), SUBSTR(last_name, 2, 4)
+FROM people;
+
+SELECT LOWER(first_name), SUBSTR(last_name, -4)
+FROM people;
+
+SELECT LOWER(first_name), REPLACE(last_name, 'a', '_')
+FROM people;
+
+SELECT MAX (CAST(quiz_points AS CHAR)) FROM people;
+
+SELECT MAX (CAST(quiz_points AS INT)) FROM people;
+
+SELECT first_name, UPPER(last_name) AS surname
+FROM people;
+
+/* INSERT VALUE*/
+INSERT INTO people(first_name) VALUES('Bob');
+
+INSERT INTO people(first_name, last_name, state, city, shirt_or_hat) 
+VALUES('Mary', 'Hamilton', 'OR', 'Portland', 'hat');
+
+SELECT * FROM people;
+
+INSERT INTO people(first_name, last_name) 
+VALUES('George', 'White'), ('John', 'Smith');
+
+/* UPDATE*/
+
+UPDATE people
+SET first_name='Martha'
+WHERE first_name='George' AND last_name='White';
+SELECT * FROM people;
+
+SELECT * FROM people
+WHERE company='Fisher LLC';
+
+UPDATE people
+SET company='Megacorp Inc' WHERE company='Fisher LLC';
+/*DELETE*/
+
+DELETE FROM people
+WHERE first_name='Martha' AND last_name='White';
+
+DELETE FROM people
+WHERE id_number IS NULL;
+
+
+
+</sql><current_tab id="0"/></tab_sql></sqlb_project>
